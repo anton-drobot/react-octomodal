@@ -1,0 +1,131 @@
+.modal {
+    $this: &;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5000;
+    padding-left: 64px;
+    padding-right: 64px;
+    background: rgba(0, 0, 0, .6);
+    overflow-y: auto;
+    &--size-s {
+        #{$this}__container {
+            max-width: 768px;
+        }
+    }
+    &--gallery {
+        &::after {
+            content: "";
+            display: block;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 56px;
+            height: 56px;
+            margin-top: -28px;
+            margin-left: -28px;
+            background: rgba(0, 0, 0, .6) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16"><path fill="#fff" d="M1.997 7.947C2.02 4.8 4.42 2.24 7.497 2.007c.275-.02.5-.24.5-.518v-1c0-.277-.224-.505-.5-.49C3.48.223.288 3.416.018 7.434c-.02.275-.022.725-.008 1C.237 12.62 3.69 15.96 7.94 15.99c4.25.03 7.75-3.3 8.037-7.484.018-.275-.206-.497-.482-.493l-1 .013c-.276.004-.5.23-.524.506-.275 3.078-2.872 5.48-6.017 5.46-3.315-.026-5.983-2.73-5.96-6.045z"/></svg>') no-repeat center;
+            pointer-events: none;
+            border-radius: 50%;
+            opacity: 0;
+        }
+        #{$this}__wrapper {
+            height: 100%;
+        }
+        #{$this}__container {
+            height: 100%;
+            padding: 0;
+            background: transparent;
+            border-radius: 0;
+            cursor: pointer;
+        }
+    }
+    &--image-loading {
+        &::after {
+            animation: modal-spin 2s infinite linear;
+            opacity: 1;
+        }
+        #{$this}__image {
+            opacity: .5;
+        }
+    }
+    &--close-on-overlay {
+        cursor: pointer;
+    }
+    &-fix {
+        min-height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+        padding: 60px 0;
+        margin: 0 auto;
+        max-width: 1400px;
+        min-width: 320px;
+        width: auto;
+    }
+    &__container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 30px;
+        position: relative;
+        background: #fff;
+        border-radius: 3px;
+        cursor: auto;
+    }
+    &__image {
+        max-width: 100%;
+        max-height: 100%;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+    &__close-button {
+        width: 64px;
+        height: 64px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background: rgba(0, 0, 0, .1) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 100 100"><path fill="#fff" d="M70.4 72.2l-20-20c-1.2-1.2-1.2-3.1 0-4.3l20-20 1.4 1.4-20 20c-.4.4-.4 1.1 0 1.5l20 20-1.4 1.4z"/><path fill="#fff" d="M29.6 72.2l-1.4-1.4 20-20c.4-.4.4-1.1 0-1.5l-20-20 1.4-1.4 20 20c1.2 1.2 1.2 3.1 0 4.3l-20 20z"/></svg>') no-repeat center;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(0, 0, 0, .3);
+        }
+    }
+    &__controls {}
+    &__button {
+        width: 64px;
+        position: fixed;
+        bottom: 0;
+        background: rgba(0, 0, 0, .1) no-repeat center;
+        cursor: pointer;
+        &--previous {
+            top: 0;
+            left: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 100 100"><path fill="#fff" d="M59.6 72.2l-20-20c-1.2-1.2-1.2-3.1 0-4.3l20-20 1.4 1.4-20 20c-.4.4-.4 1.1 0 1.5l20 20-1.4 1.4z"/></svg>');
+        }
+        &--next {
+            top: 64px;
+            right: 0;
+            background-position: center calc(50% - 32px);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 100 100"><path fill="#fff" d="M38.7 70.8l20-20c.4-.4.4-1.1 0-1.5l-20-20 1.4-1.4 20 20c1.2 1.2 1.2 3.1 0 4.3l-20 20-1.4-1.4z"/></svg>');
+        }
+        &:hover {
+            background-color: rgba(0, 0, 0, .3);
+        }
+    }
+    @keyframes modal-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
